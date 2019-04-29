@@ -1,6 +1,6 @@
 plugins {
   id 'application'
-  id 'com.github.johnrengelman.shadow' version '2.0.2'
+  id 'com.github.johnrengelman.shadow' version '5.0.0'
 }
 
 repositories {
@@ -11,7 +11,7 @@ version = '1.0-SNAPSHOT'
 sourceCompatibility = '1.8'
 mainClassName = 'io.vertx.core.Launcher'
 
-def vertxVersion = '3.5.2'
+def vertxVersion = '3.7.0'
 def mainVerticleName = 'io.vertx.starter.MainVerticle'
 def watchForChange = 'src/**/*'
 def doOnChange = './gradlew classes'
@@ -33,9 +33,6 @@ shadowJar {
 }
 
 run {
-  args = ['run', mainVerticleName, "--redeploy=$watchForChange", "--launcher-class=$mainClassName", "--on-redeploy=$doOnChange"]
+  args = ['run', mainVerticleName, ,"-XX:+UseConcMarkSweepGC", "--redeploy=$watchForChange", "--launcher-class=$mainClassName", "--on-redeploy=$doOnChange"]
 }
 
-task wrapper(type: Wrapper) {
-  gradleVersion = '4.5.1'
-}
